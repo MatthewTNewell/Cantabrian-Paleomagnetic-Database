@@ -2,7 +2,7 @@
 
 This compilation of paleomagnetic data contains all currently published paleomagnetic data from the Cantabrian Zone of North Western Iberia (as of June 2021). It was originally compiled as part of an MSc Resources and Exploration Geology thesis at Cardiff University looking at the kinematics and formation mechanism of the Cantabrian orocline. This data came from 14 studies *(Bonhommet et al., 1981; Hirt et al. 1992; Pares et al., 1994; Perroud and Bonhommet, 1984; Ries et al., 1980; Schott and Peres, 1987; Stewart, 1995; Symons et al., 2015; Van der Voo et al., 1997; Weil et al., 2013; Weil et al., 2010; Weil, 2006; Weil et al. 2001; Weil et al., 2000)* as well as new currently unpublished data from the Villamanin area collected by Professor Thomas Blenkinsop (Cardiff University) and Tania Mochales (Instituto Geologico y Minero de Espana) during the summers of 2015 and 2016 at 13 sites across the Lancara, San Emiliana, La Vid, Barcallente and Barrios Formations. Overall 490 sites sampled for paleomagnetic investigation from Paleozoic Redbeds and Carbonates are presnted here. Data was extracted from papers using the freely available software Tabula and is provided here in several different formats for ease of use in a range of spreadsheets and database management systems.
 
-This compilation has been laid out to be similar to the Pyrenean paleomagnetic database *(Oliva-Urcia et al., 2008)* and is explained below. All of these data fields try to assemble the information necessary to quantify the amount of vertical axis rotation the rocks have experienced, as well as evaluate the reliability and quality of the data based on the requirements laid out by Van der Voo (1990), allowing future overviews of the Cantabrian dataset. 
+This compilation has been laid out to be similar to the Pyrenean paleomagnetic database *(Lopez et al., 2008)* and is explained below. All of these data fields try to assemble the information necessary to quantify the amount of vertical axis rotation the rocks have experienced, as well as evaluate the reliability and quality of the data based on the requirements laid out by Van der Voo (1990), allowing future overviews of the Cantabrian dataset. 
 
 ## General Information
 
@@ -43,7 +43,7 @@ Plunge = Plunge of structure
 
 ### Paleomagnetic Information
 
-In the majority of studies 3 major magnetic compents are identified: a late Carboniferous C component, a late Stephanian - early Perminan B component and a End Permian component (eP). For Simplicity instead of giving unlbocking temperatures or coercitivities to describe the magnetic components they have been seperated into these three catagories. For each catagory the following information is given:
+In the majority of studies 2 major magnetic compents are identified: a late Carboniferous C component, a late Stephanian - early Perminan B component *(Weil et al., 2000)*. For simplicity instead of giving unlbocking temperatures or coercitivities to describe the magnetic components they have been seperated into these C and B catagories. Any magnetisation that doesn't fall into these catagories have the ages identified within the comments section. For each catagory the following information is given:
 
 n = Number of samples used in analysis  
 N = Number of samples collected  
