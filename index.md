@@ -1,3 +1,3 @@
 this is a webmap
 
-<iframe src="Webmap.html" height="500" width="500"></iframe>
+<iframe src="Webmap.html" height="800" width="800"></iframe>
