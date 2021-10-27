@@ -9,4 +9,8 @@ The data contained here has been restricted to the Cantabrian Zone of North West
 
 ## Submit New Paleomagentic Data
 
+If readers wish to submit a new addition to the compilation or amend an existing one, please complete the form below or send the relatent new publication to newellm@cardiff.ac.uk.
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeXsX1mFO7O-u2IwYeMS30QUhMZEuMcgzagZV5nDD1BInAsMA/viewform?embedded=true" width="640" height="1186" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
 ## Downloads
