@@ -6,3 +6,8 @@ The data contained here has been restricted to the Cantabrian Zone of North West
 
 
 <iframe src="Webmap.html" height="800" width="800"></iframe>
+
+
+## Submit New Paleomagentic Data
+
+## Downloads
