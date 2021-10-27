@@ -69,39 +69,39 @@ Pol = +  Normal polarity
 
 ## References
 
-Bonhommet, H., Cobbold, N. and Perroud, P. (1981). Paleomagnetism and cross-folding in a key area of the Asturian Arc (Spain). Journal of Geodynamics, 86, pp. 1873-1887.
+Bonhommet, H., Cobbold, N. and Perroud, P. (1981). Paleomagnetism and cross-folding in a key area of the Asturian Arc (Spain). *Journal of Geodynamics*, 86, pp. 1873-1887.
 
-Brime, C., García-López, S. Bastida, F., Luz Valín, M., Sanz-López, J. and Aller, J. (2001). Transition from Diagenesis to Metamorphism Near the Front of the Variscan Regional  Metamorphism (Cantabrian Zone, Northwestern Spain). The Journal of Geology, 109(3), pp. 363-379. 
+Brime, C., García-López, S. Bastida, F., Luz Valín, M., Sanz-López, J. and Aller, J. (2001). Transition from Diagenesis to Metamorphism Near the Front of the Variscan Regional  Metamorphism (Cantabrian Zone, Northwestern Spain). *The Journal of Geology*, 109(3), pp. 363-379. 
 
-Hirt, A., Lowrie, W., Julivert, M. and Arboleya, M. (1992). Paleomagnetic results in support of a model for the origin of the Asturian arc. Tectonophysics, 213(3-4), pp. 321-339.
+Hirt, A., Lowrie, W., Julivert, M. and Arboleya, M. (1992). Paleomagnetic results in support of a model for the origin of the Asturian arc. *Tectonophysics*, 213(3-4), pp. 321-339.
 
-IGME (1971-1990). Geologic map of Spain at scale 1/50,000. Geologic and Mining Institute of Spain. Madrid. 
+IGME (1971-1990). Geologic map of Spain at scale 1/50,000. *Geologic and Mining Institute of Spain*. Madrid. 
 
-Julivert, M. (1971). Decollement Tectonics in the Hercynian Cordillera of Northwest Spain. American Journal of Science, 270, pp. 1-29.
+Julivert, M. (1971). Decollement Tectonics in the Hercynian Cordillera of Northwest Spain. *American Journal of Science*, 270, pp. 1-29.
 
-López, M., Oliván, C., Oliva, B. and Puedo, E. (2008). Pyrenean Paleomagnetic databases. Geo-Themes, 10, pp. 1219-1222. 
+López, M., Oliván, C., Oliva, B. and Puedo, E. (2008). Pyrenean Paleomagnetic databases. *Geo-Themes*, 10, pp. 1219-1222. 
 
-Parés, J., Van der Voo, R., Stamatakos, J and Pérez-Estaún, A. (1994). Remagnetisations and postfolding oroclinal rotations in the Cantabrian Asturian Arc, Northern Spain.  Tectonics, 13(6), pp. 1461-1471. 
+Parés, J., Van der Voo, R., Stamatakos, J and Pérez-Estaún, A. (1994). Remagnetisations and postfolding oroclinal rotations in the Cantabrian Asturian Arc, Northern Spain.  *Tectonics*, 13(6), pp. 1461-1471. 
 
-Ries, A., Richardson, A. and Shackleton, R. (1980). Rotation of the Iberian Arc: Paleomagnetic results from Northern Spain. Earth and Planetary Science Letters, 50, pp. 301-310. 
+Ries, A., Richardson, A. and Shackleton, R. (1980). Rotation of the Iberian Arc: Paleomagnetic results from Northern Spain. *Earth and Planetary Science Letters*, 50, pp. 301-310. 
 
-Schott, J. and Peres, A. (1987). Paleomagnetism of Permo-Triassic Redbeds from the Asutrias and Cantabric Chain (northern Spain): evidence for strong lower Tertiary    remagnetizations. Tectonophysics, 140, pp. 179-191. 
+Schott, J. and Peres, A. (1987). Paleomagnetism of Permo-Triassic Redbeds from the Asutrias and Cantabric Chain (northern Spain): evidence for strong lower Tertiary    remagnetizations. *Tectonophysics*, 140, pp. 179-191. 
 
-Stewart, S. (1995). Paleomagnetic analysis of fold kinematics and implications for geological  models of the Cantabrian/Asturian arc, north Spain. Journal of Geophysical Research,  100, pp. 20079-20094. 
+Stewart, S. (1995). Paleomagnetic analysis of fold kinematics and implications for geological  models of the Cantabrian/Asturian arc, north Spain. *Journal of Geophysical Research*,  100, pp. 20079-20094. 
 
-Van der Voo, R. (1990). The reliability of paleomagnetic data. Tectonophysics, 184, pp. 1-9. 
+Van der Voo, R. (1990). The reliability of paleomagnetic data. *Tectonophysics*, 184, pp. 1-9. 
 
-Van der Voo, R., Stamatakos, J. and Pares, J. (1997). Kinematic constraints of thrust-belt curvature from syndeformational magnetisations in the Lagos del Valle Syncline in the Cantanrian Arc, Spain. Journal of Geophysical Research, 102(B5), pp. 10105-10119. 
+Van der Voo, R., Stamatakos, J. and Pares, J. (1997). Kinematic constraints of thrust-belt curvature from syndeformational magnetisations in the Lagos del Valle Syncline in the Cantanrian Arc, Spain. *Journal of Geophysical Research*, 102(B5), pp. 10105-10119. 
 
-Weil, A. (2006). Kinematics of Orocline Tightening in the Core of an Arc: Paleomagnetic Analysis of the Ponga Unit, Northern Spain. Tectonics, 25(3). 
+Weil, A. (2006). Kinematics of Orocline Tightening in the Core of an Arc: Paleomagnetic Analysis of the Ponga Unit, Northern Spain. *Tectonics*, 25(3). 
 
-Weil, A., Gutierrez-Alonzo, G. and Conon, J. (2010). New time constraints on lithospheric-scale oroclinal bending of the Ibero-Ibero-American Arc: a paleomagnetic study of the earliest Permian rocks from Iberia. Journal of the Geological Society, London, 167(1), pp. 127-143.
+Weil, A., Gutierrez-Alonzo, G. and Conon, J. (2010). New time constraints on lithospheric-scale oroclinal bending of the Ibero-Ibero-American Arc: a paleomagnetic study of the earliest Permian rocks from Iberia. *Journal of the Geological Society of London*, 167(1), pp. 127-143.
 
-Weil, A., Gutierrez-Alonso, G. and Wicks, D. (2013). Investigating the kinematics of local thrust sheet rotation in the limb of an orocline: A paleomagnetic and structural analysis of the Elsa tectonic unit, Cantabrian-Austurian Arc, NW Iberia. International Journal of Earth Science, 102(1), pp. 43-60. 
+Weil, A., Gutierrez-Alonso, G. and Wicks, D. (2013). Investigating the kinematics of local thrust sheet rotation in the limb of an orocline: A paleomagnetic and structural analysis of the Elsa tectonic unit, Cantabrian-Austurian Arc, NW Iberia. *International Journal of Earth Science*, 102(1), pp. 43-60. 
 
-Weil, A., Van der Voo, R. and Van der Pluijm, B. (2001). Oroclinal bending and evidence against the Pangea megashear: The Cantabria-Asturias arc (northern Spain). Geology, 29(11), pp. 991-994.
+Weil, A., Van der Voo, R. and Van der Pluijm, B. (2001). Oroclinal bending and evidence against the Pangea megashear: The Cantabria-Asturias arc (northern Spain). *Geology*, 29(11), pp. 991-994.
 
-Weil, A., Van der Voo, R., Van der Pluijm, A. and Parés, J. (2000). The formation of an orocline by multiphase deformation: a paleomagnetic investigation of the Cantabrian- Asturias Arc (northern Spain). Journal of Structural Geology, 22(6), pp. 735-756.
+Weil, A., Van der Voo, R., Van der Pluijm, A. and Parés, J. (2000). The formation of an orocline by multiphase deformation: a paleomagnetic investigation of the Cantabrian- Asturias Arc (northern Spain). *Journal of Structural Geology*, 22(6), pp. 735-756.
 
 
 
