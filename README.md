@@ -53,7 +53,6 @@ Plunge = Plunge of local structures
 
 In the majority of studies on the region two major magnetic components are identidifed: a late Carbonifeous C component and a late Stephanian - early Permian B component *(Weil et al., 2000)*. For simplcity instead of giving the unlocking temperatures or coercitivites to describe the magnetic components they have been seperated into the C and B catagories, any magnetisation that doesn't fall into this clasification have the ages identified within the comments section.
 
-UnblockT = Temperature or temperature range of unblocking component considered
 n = Number of samples used in analysis  
 N = Number of samples collected  
 D(bac) = Magnetic declination (before any correction)  
