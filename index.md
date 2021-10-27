@@ -4,4 +4,5 @@ This compilation of paleomagnetic data contains all currently published paleomag
 
 The data contained here has been restricted to the Cantabrian Zone of North Western Iberia as it contains the vast majority of available paleomagnetic measurements. This is a consequence of its key location at the core of the larger Ibero-Amorican Arc, where the greatest change in structural trends is observed. On top of this the relative lack of metamorphism, well below Curie temperature for the main two ferromagnetic minerals haematite and magnetite and low internal strain in the rocks result in higher levels of integrity of the paleomagnetic vectors with respect to the more internal Variscan units (Hirt et al., 1992; Brime et al., 2001). 
 
-<iframe src="Webmap.html" height="1000" width="1200"></iframe>
+
+<iframe src="Webmap.html" height="1000" width="1000"></iframe>
