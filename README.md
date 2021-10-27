@@ -63,9 +63,9 @@ I(abc) = Magnetic inclination (after bedding correction) or any other form of st
 a(bac) = Cone of 95% confidence about mean direction before bedding or structural correction  
 k(bac) = Precision parameter before bedding or structural correction  
 Pol = +  Normal polarity  
-&nbsp; &nbsp; &nbsp; &nbsp; = -  Reverse polarity  
-&nbsp; &nbsp; &nbsp; &nbsp; = +/-  Mostly normal polarity  
-&nbsp; &nbsp; &nbsp; &nbsp; = -/+  Mostly reverse polarity  
+&nbsp; &nbsp; &nbsp; = -  Reverse polarity  
+&nbsp; &nbsp; &nbsp; = +/-  Mostly normal polarity  
+&nbsp; &nbsp; &nbsp; = -/+  Mostly reverse polarity  
 
 ## References
 
