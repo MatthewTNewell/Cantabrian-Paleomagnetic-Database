@@ -1,4 +1,4 @@
-# Cantabrian Paleomagnetic Database v2
+# Cantabrian Paleomagnetic Database
  
 This compilation of paleomagnetic data contains all currently published paleomagnetic roatation control point data from the Cantabrian Zone of North Western Iberia. It was originally compiled as part of an MSc Resources and Exploration Geology thesis at Cardiff University looking at the kinematics and formation mechanism of the Cantabrian orocline.
 
