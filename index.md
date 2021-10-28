@@ -25,7 +25,7 @@ The links below will redirect you to the appropriate file on my GitHub account t
 - [Post Carboniferous Magnetisations Shapefile](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/Post_Carboniferous_Mag.zip)
 - [B Magnetisation (.kmz)]()
 - [C Magnetisation (.kmz)]()
-- [Post Permian Magnetisations (.kmz)]()
+- [Post Carboniferous Magnetisations (.kmz)]()
 
 P2K Spreadsheet used for creating the paleomagnetic vector .kmz files is avalible for download at [https://github.com/tblenkinsop/P2K](https://github.com/tblenkinsop/P2K).
 
