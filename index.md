@@ -6,6 +6,8 @@ The data contained here came from 12 studies *(Bonhommet et al., 1981; Hirt et a
 
 <center><iframe src="Webmap.html" height="695" width="1025"></iframe></center>
 
+<center><iframe src="Cantabrian_Paleomagnetic_Database.html" height="695" width="1025"></iframe></center>
+
 ## Submit New Paleomagentic Data
 
 If readers wish to submit a new addition to the compilation or amend an existing one, please complete the form below or send the relevant data to newellm@cardiff.ac.uk.
