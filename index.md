@@ -27,7 +27,7 @@ The links below will redirect you to the appropriate file on my GitHub account t
 - [C Magnetisation (.kmz)]()
 - [Post Permian Magnetisations (.kmz)]()
 
-P2K Spreadsheet used for creating the paleomagnetic vector .kmz file is avalible for download at [https://github.com/tblenkinsop/P2K](https://github.com/tblenkinsop/P2K).
+P2K Spreadsheet used for creating the paleomagnetic vector .kmz files is avalible for download at [https://github.com/tblenkinsop/P2K](https://github.com/tblenkinsop/P2K).
 
 ## References
 
