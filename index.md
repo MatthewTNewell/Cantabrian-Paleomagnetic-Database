@@ -19,15 +19,15 @@ The links below will redirect you to the appropriate file on my GitHub account t
 - [Cantabrian Paleomagnetic Database (.xlsx)](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/Cantabrian_Paleomagnetic_Database_28_10_21.xlsx)
 - [Cantabrian Paleomagnetic Database (.json)]()
 - [Cantabrian Paleomagnetic Database Information](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/README.md)
-- [Paleomagnetic Sampling Sites Shapefile]()
-- [B Magnetisation Shapefile]()
-- [C Magnetisation Shapefile]()
-- [Post Permian Magnetisations Shapefile]()
+- [Paleomagnetic Sampling Sites Shapefile](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/Paleomagnetic_Locations.zip)
+- [B Magnetisation Shapefile](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/B_Mag.zip)
+- [C Magnetisation Shapefile](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/C_Mag.zip)
+- [Post Carboniferous Magnetisations Shapefile](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/Post_Carboniferous_Mag.zip)
 - [B Magnetisation (.kmz)]()
 - [C Magnetisation (.kmz)]()
 - [Post Permian Magnetisations (.kmz)]()
 
-P2K Spreadsheet - If used in publications or teaching materials, please cite ................
+P2K Spreadsheet used for creating the paleomagnetic vector .kmz file is avalible for download at https://github.com/tblenkinsop/P2K.
 
 ## References
 
