@@ -16,16 +16,16 @@ If readers wish to submit a new addition to the compilation or amend an existing
 
 The links below will redirect you to the appropriate file on my GitHub account to download.
 
-- Cantabrian Paleomagnetic Database (.xls)
-- Cantabrian Paleomagnetic Database (.json)
-- Cantabrian Paleomagnetic Database Information
-- Paleomagnetic Sampling Sites Shapefile
-- B Magnetisation Shapefile
-- C Magnetisation Shapefile
-- Post Permian Magnetisations Shapefile
-- B Magnetisation (.kmz)
-- C Magnetisation (.kmz)
-- Post Permian Magnetisations (.kmz)
+- [Cantabrian Paleomagnetic Database (.xls)]()
+- [Cantabrian Paleomagnetic Database (.json)]()
+- [Cantabrian Paleomagnetic Database Information]()
+- [Paleomagnetic Sampling Sites Shapefile]()
+- [B Magnetisation Shapefile]()
+- [C Magnetisation Shapefile]()
+- [Post Permian Magnetisations Shapefile]()
+- [B Magnetisation (.kmz)]()
+- [C Magnetisation (.kmz)]()
+- [Post Permian Magnetisations (.kmz)]()
 
 P2K Spreadsheet - If used in publications or teaching materials, please cite ................
 
