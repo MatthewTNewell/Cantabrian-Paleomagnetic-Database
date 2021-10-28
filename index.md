@@ -18,7 +18,7 @@ The links below will redirect you to the appropriate file on my GitHub account t
 
 - [Cantabrian Paleomagnetic Database (.xlsx)](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/Cantabrian_Paleomagnetic_Database_28_10_21.xlsx)
 - [Cantabrian Paleomagnetic Database (.json)]()
-- [Cantabrian Paleomagnetic Database Information]()
+- [Cantabrian Paleomagnetic Database Information](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/README.md)
 - [Paleomagnetic Sampling Sites Shapefile]()
 - [B Magnetisation Shapefile]()
 - [C Magnetisation Shapefile]()
