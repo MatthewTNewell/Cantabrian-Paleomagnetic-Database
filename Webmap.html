@@ -1,898 +1,523 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="css/leaflet.css">
-        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-measure.css">
-        <style>
-        #map {
-            width: 994px;
-            height: 672px;
-        }
-        </style>
-        <title></title>
-    </head>
-    <body>
-        <div id="map">
-        </div>
-        <script src="js/qgis2web_expressions.js"></script>
-        <script src="js/leaflet.js"></script>
-        <script src="js/multi-style-layer.js"></script>
-        <script src="js/leaflet-svg-shape-markers.min.js"></script>
-        <script src="js/leaflet.rotatedMarker.js"></script>
-        <script src="js/leaflet.pattern.js"></script>
-        <script src="js/leaflet-hash.js"></script>
-        <script src="js/Autolinker.min.js"></script>
-        <script src="js/rbush.min.js"></script>
-        <script src="js/labelgun.min.js"></script>
-        <script src="js/labels.js"></script>
-        <script src="js/leaflet-measure.js"></script>
-        <script src="data/Post_Carboniferous_Mag_2.js"></script>
-        <script src="data/C_Mag_3.js"></script>
-        <script src="data/B_Mag_4.js"></script>
-        <script src="data/Paleomagnetic_Locations_5.js"></script>
-        <script src="js/leaflet-marker.js"></script>
-        <script>
-        var highlightLayer;
-        function highlightFeature(e) {
-            highlightLayer = e.target;
-
-            if (e.target.feature.geometry.type === 'LineString') {
-              highlightLayer.setStyle({
-                color: '#ffff00',
-              });
-            } else {
-              highlightLayer.setStyle({
-                fillColor: '#ffff00',
-                fillOpacity: 1
-              });
-            }
-        }
-        var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[42.52276002284515,-6.831116482973698],[43.715187053503534,-4.412285623597275]]);
-        var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
-        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
-        var measureControl = new L.Control.Measure({
-            position: 'topleft',
-            primaryLengthUnit: 'meters',
-            secondaryLengthUnit: 'kilometers',
-            primaryAreaUnit: 'sqmeters',
-            secondaryAreaUnit: 'hectares'
-        });
-        measureControl.addTo(map);
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-        .innerHTML = '';
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-        .className += ' fas fa-ruler';
-        var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-        }
-        map.createPane('pane_EsriTopoWorld_0');
-        map.getPane('pane_EsriTopoWorld_0').style.zIndex = 400;
-        var layer_EsriTopoWorld_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-            pane: 'pane_EsriTopoWorld_0',
-            opacity: 1.0,
-            attribution: '',
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 20
-        });
-        layer_EsriTopoWorld_0;
-        map.addLayer(layer_EsriTopoWorld_0);
-        map.createPane('pane_EsriSatellite_1');
-        map.getPane('pane_EsriSatellite_1').style.zIndex = 401;
-        var layer_EsriSatellite_1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            pane: 'pane_EsriSatellite_1',
-            opacity: 1.0,
-            attribution: '',
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 17
-        });
-        layer_EsriSatellite_1;
-        map.addLayer(layer_EsriSatellite_1);
-        function pop_Post_Carboniferous_Mag_2(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">Site_Profi</th>\
-                        <td>' + (feature.properties['Site_Profi'] !== null ? autolinker.link(feature.properties['Site_Profi'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Year</th>\
-                        <td>' + (feature.properties['Year'] !== null ? autolinker.link(feature.properties['Year'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Main_Autho</th>\
-                        <td>' + (feature.properties['Main_Autho'] !== null ? autolinker.link(feature.properties['Main_Autho'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">University</th>\
-                        <td>' + (feature.properties['University'] !== null ? autolinker.link(feature.properties['University'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">DOI</th>\
-                        <td>' + (feature.properties['DOI'] !== null ? autolinker.link(feature.properties['DOI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">M_R</th>\
-                        <td>' + (feature.properties['M_R'] !== null ? autolinker.link(feature.properties['M_R'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Latitude_N</th>\
-                        <td>' + (feature.properties['Latitude_N'] !== null ? autolinker.link(feature.properties['Latitude_N'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Longitude_</th>\
-                        <td>' + (feature.properties['Longitude_'] !== null ? autolinker.link(feature.properties['Longitude_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Q_Geo</th>\
-                        <td>' + (feature.properties['Q_Geo'] !== null ? autolinker.link(feature.properties['Q_Geo'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Rock_Type</th>\
-                        <td>' + (feature.properties['Rock_Type'] !== null ? autolinker.link(feature.properties['Rock_Type'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Formation</th>\
-                        <td>' + (feature.properties['Formation'] !== null ? autolinker.link(feature.properties['Formation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Stratigrap</th>\
-                        <td>' + (feature.properties['Stratigrap'] !== null ? autolinker.link(feature.properties['Stratigrap'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Unit</th>\
-                        <td>' + (feature.properties['Unit'] !== null ? autolinker.link(feature.properties['Unit'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Structural</th>\
-                        <td>' + (feature.properties['Structural'] !== null ? autolinker.link(feature.properties['Structural'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Strike</th>\
-                        <td>' + (feature.properties['Strike'] !== null ? autolinker.link(feature.properties['Strike'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dip</th>\
-                        <td>' + (feature.properties['Dip'] !== null ? autolinker.link(feature.properties['Dip'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">DD</th>\
-                        <td>' + (feature.properties['DD'] !== null ? autolinker.link(feature.properties['DD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Ov</th>\
-                        <td>' + (feature.properties['Ov'] !== null ? autolinker.link(feature.properties['Ov'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Q_Str</th>\
-                        <td>' + (feature.properties['Q_Str'] !== null ? autolinker.link(feature.properties['Q_Str'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Structure</th>\
-                        <td>' + (feature.properties['Structure'] !== null ? autolinker.link(feature.properties['Structure'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Trend</th>\
-                        <td>' + (feature.properties['Trend'] !== null ? autolinker.link(feature.properties['Trend'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Plunge</th>\
-                        <td>' + (feature.properties['Plunge'] !== null ? autolinker.link(feature.properties['Plunge'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">n</th>\
-                        <td>' + (feature.properties['n'] !== null ? autolinker.link(feature.properties['n'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">N1</th>\
-                        <td>' + (feature.properties['N1'] !== null ? autolinker.link(feature.properties['N1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_bac_</th>\
-                        <td>' + (feature.properties['D_bac_'] !== null ? autolinker.link(feature.properties['D_bac_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_bac_</th>\
-                        <td>' + (feature.properties['I_bac_'] !== null ? autolinker.link(feature.properties['I_bac_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_abc_</th>\
-                        <td>' + (feature.properties['D_abc_'] !== null ? autolinker.link(feature.properties['D_abc_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_abc_</th>\
-                        <td>' + (feature.properties['I_abc_'] !== null ? autolinker.link(feature.properties['I_abc_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">a95</th>\
-                        <td>' + (feature.properties['a95'] !== null ? autolinker.link(feature.properties['a95'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">k</th>\
-                        <td>' + (feature.properties['k'] !== null ? autolinker.link(feature.properties['k'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Pol</th>\
-                        <td>' + (feature.properties['Pol'] !== null ? autolinker.link(feature.properties['Pol'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Comments</th>\
-                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        var LeafIcon = L.Icon.extend({
-            options: {
-                iconSize:     [100, 100],
-                shadowSize:   [0, 0],
-                iconAnchor:   [50, 50],
-                popupAnchor:  [-3, -76]
-            }
-        });
-
-        let achenSvgString = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/></svg>'
-        let myIconUrl = encodeURI("data:image/svg+xml," + achenSvgString).replace('#','%23');
-
-        function style_Post_Carboniferous_Mag_2_0(features) {
-            return {
-                pane: 'pane_Post_Carboniferous_Mag_2',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(196,60,57,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
-                interactive: true,
-                rotationAngle: features.properties.D_bac_,
-                icon: new LeafIcon({
-                    iconUrl: myIconUrl
-                })
-            }
-        }
-        map.createPane('pane_Post_Carboniferous_Mag_2');
-        map.getPane('pane_Post_Carboniferous_Mag_2').style.zIndex = 402;
-        map.getPane('pane_Post_Carboniferous_Mag_2').style['mix-blend-mode'] = 'normal';
-        var layer_Post_Carboniferous_Mag_2 = new L.geoJson.multiStyle(json_Post_Carboniferous_Mag_2, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Post_Carboniferous_Mag_2',
-            layerName: 'layer_Post_Carboniferous_Mag_2',
-            pane: 'pane_Post_Carboniferous_Mag_2',
-            onEachFeature: pop_Post_Carboniferous_Mag_2,
-            pointToLayers: [function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.marker(latlng, style_Post_Carboniferous_Mag_2_0(feature));
-            }
-        ]});
-        bounds_group.addLayer(layer_Post_Carboniferous_Mag_2);
-        map.addLayer(layer_Post_Carboniferous_Mag_2);
-        function pop_C_Mag_3(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">Site_Profi</th>\
-                        <td>' + (feature.properties['Site_Profi'] !== null ? autolinker.link(feature.properties['Site_Profi'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Year</th>\
-                        <td>' + (feature.properties['Year'] !== null ? autolinker.link(feature.properties['Year'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Main_Autho</th>\
-                        <td>' + (feature.properties['Main_Autho'] !== null ? autolinker.link(feature.properties['Main_Autho'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">University</th>\
-                        <td>' + (feature.properties['University'] !== null ? autolinker.link(feature.properties['University'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">DOI</th>\
-                        <td>' + (feature.properties['DOI'] !== null ? autolinker.link(feature.properties['DOI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">M_R</th>\
-                        <td>' + (feature.properties['M_R'] !== null ? autolinker.link(feature.properties['M_R'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Latitude_N</th>\
-                        <td>' + (feature.properties['Latitude_N'] !== null ? autolinker.link(feature.properties['Latitude_N'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Longitude_</th>\
-                        <td>' + (feature.properties['Longitude_'] !== null ? autolinker.link(feature.properties['Longitude_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Q_Geo</th>\
-                        <td>' + (feature.properties['Q_Geo'] !== null ? autolinker.link(feature.properties['Q_Geo'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Rock_Type</th>\
-                        <td>' + (feature.properties['Rock_Type'] !== null ? autolinker.link(feature.properties['Rock_Type'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Formation</th>\
-                        <td>' + (feature.properties['Formation'] !== null ? autolinker.link(feature.properties['Formation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Stratigrap</th>\
-                        <td>' + (feature.properties['Stratigrap'] !== null ? autolinker.link(feature.properties['Stratigrap'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Unit</th>\
-                        <td>' + (feature.properties['Unit'] !== null ? autolinker.link(feature.properties['Unit'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Structural</th>\
-                        <td>' + (feature.properties['Structural'] !== null ? autolinker.link(feature.properties['Structural'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Strike</th>\
-                        <td>' + (feature.properties['Strike'] !== null ? autolinker.link(feature.properties['Strike'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dip</th>\
-                        <td>' + (feature.properties['Dip'] !== null ? autolinker.link(feature.properties['Dip'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">DD</th>\
-                        <td>' + (feature.properties['DD'] !== null ? autolinker.link(feature.properties['DD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Ov</th>\
-                        <td>' + (feature.properties['Ov'] !== null ? autolinker.link(feature.properties['Ov'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Q_Str</th>\
-                        <td>' + (feature.properties['Q_Str'] !== null ? autolinker.link(feature.properties['Q_Str'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Structure</th>\
-                        <td>' + (feature.properties['Structure'] !== null ? autolinker.link(feature.properties['Structure'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Trend</th>\
-                        <td>' + (feature.properties['Trend'] !== null ? autolinker.link(feature.properties['Trend'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Plunge</th>\
-                        <td>' + (feature.properties['Plunge'] !== null ? autolinker.link(feature.properties['Plunge'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">n</th>\
-                        <td>' + (feature.properties['n'] !== null ? autolinker.link(feature.properties['n'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">N1</th>\
-                        <td>' + (feature.properties['N1'] !== null ? autolinker.link(feature.properties['N1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_bac_</th>\
-                        <td>' + (feature.properties['D_bac_'] !== null ? autolinker.link(feature.properties['D_bac_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_bac_</th>\
-                        <td>' + (feature.properties['I_bac_'] !== null ? autolinker.link(feature.properties['I_bac_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_abc_</th>\
-                        <td>' + (feature.properties['D_abc_'] !== null ? autolinker.link(feature.properties['D_abc_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_abc_</th>\
-                        <td>' + (feature.properties['I_abc_'] !== null ? autolinker.link(feature.properties['I_abc_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">a95</th>\
-                        <td>' + (feature.properties['a95'] !== null ? autolinker.link(feature.properties['a95'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">k</th>\
-                        <td>' + (feature.properties['k'] !== null ? autolinker.link(feature.properties['k'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Pol</th>\
-                        <td>' + (feature.properties['Pol'] !== null ? autolinker.link(feature.properties['Pol'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Comments</th>\
-                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_C_Mag_3_0(features) {
-            return {
-                pane: 'pane_C_Mag_3',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(196,60,57,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
-                interactive: true,
-                rotationAngle: features.properties.D_bac_,
-                icon: new LeafIcon({
-                    iconUrl: myIconUrl
-                })
-            }
-        }
-        map.createPane('pane_C_Mag_3');
-        map.getPane('pane_C_Mag_3').style.zIndex = 403;
-        map.getPane('pane_C_Mag_3').style['mix-blend-mode'] = 'normal';
-        var layer_C_Mag_3 = new L.geoJson.multiStyle(json_C_Mag_3, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_C_Mag_3',
-            layerName: 'layer_C_Mag_3',
-            pane: 'pane_C_Mag_3',
-            onEachFeature: pop_C_Mag_3,
-            pointToLayers: [function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.marker(latlng, style_C_Mag_3_0(feature));
-            }
-        ]});
-        bounds_group.addLayer(layer_C_Mag_3);
-        map.addLayer(layer_C_Mag_3);
-        function pop_B_Mag_4(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">Site_Profi</th>\
-                        <td>' + (feature.properties['Site_Profi'] !== null ? autolinker.link(feature.properties['Site_Profi'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Year</th>\
-                        <td>' + (feature.properties['Year'] !== null ? autolinker.link(feature.properties['Year'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Main_Autho</th>\
-                        <td>' + (feature.properties['Main_Autho'] !== null ? autolinker.link(feature.properties['Main_Autho'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Ref</th>\
-                        <td>' + (feature.properties['Ref'] !== null ? autolinker.link(feature.properties['Ref'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">University</th>\
-                        <td>' + (feature.properties['University'] !== null ? autolinker.link(feature.properties['University'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">DOI</th>\
-                        <td>' + (feature.properties['DOI'] !== null ? autolinker.link(feature.properties['DOI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">M_R</th>\
-                        <td>' + (feature.properties['M_R'] !== null ? autolinker.link(feature.properties['M_R'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Latitude_N</th>\
-                        <td>' + (feature.properties['Latitude_N'] !== null ? autolinker.link(feature.properties['Latitude_N'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Longitude_</th>\
-                        <td>' + (feature.properties['Longitude_'] !== null ? autolinker.link(feature.properties['Longitude_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Q_Geo</th>\
-                        <td>' + (feature.properties['Q_Geo'] !== null ? autolinker.link(feature.properties['Q_Geo'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Rock_Type</th>\
-                        <td>' + (feature.properties['Rock_Type'] !== null ? autolinker.link(feature.properties['Rock_Type'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Formation</th>\
-                        <td>' + (feature.properties['Formation'] !== null ? autolinker.link(feature.properties['Formation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Stratigrap</th>\
-                        <td>' + (feature.properties['Stratigrap'] !== null ? autolinker.link(feature.properties['Stratigrap'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Unit</th>\
-                        <td>' + (feature.properties['Unit'] !== null ? autolinker.link(feature.properties['Unit'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Structural</th>\
-                        <td>' + (feature.properties['Structural'] !== null ? autolinker.link(feature.properties['Structural'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Strike</th>\
-                        <td>' + (feature.properties['Strike'] !== null ? autolinker.link(feature.properties['Strike'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dip</th>\
-                        <td>' + (feature.properties['Dip'] !== null ? autolinker.link(feature.properties['Dip'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">DD</th>\
-                        <td>' + (feature.properties['DD'] !== null ? autolinker.link(feature.properties['DD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Ov</th>\
-                        <td>' + (feature.properties['Ov'] !== null ? autolinker.link(feature.properties['Ov'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Q_Str</th>\
-                        <td>' + (feature.properties['Q_Str'] !== null ? autolinker.link(feature.properties['Q_Str'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Structure</th>\
-                        <td>' + (feature.properties['Structure'] !== null ? autolinker.link(feature.properties['Structure'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Trend</th>\
-                        <td>' + (feature.properties['Trend'] !== null ? autolinker.link(feature.properties['Trend'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Plunge</th>\
-                        <td>' + (feature.properties['Plunge'] !== null ? autolinker.link(feature.properties['Plunge'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">n</th>\
-                        <td>' + (feature.properties['n'] !== null ? autolinker.link(feature.properties['n'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">N1</th>\
-                        <td>' + (feature.properties['N1'] !== null ? autolinker.link(feature.properties['N1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_bac_</th>\
-                        <td>' + (feature.properties['D_bac_'] !== null ? autolinker.link(feature.properties['D_bac_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_bac_</th>\
-                        <td>' + (feature.properties['I_bac_'] !== null ? autolinker.link(feature.properties['I_bac_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_abc_</th>\
-                        <td>' + (feature.properties['D_abc_'] !== null ? autolinker.link(feature.properties['D_abc_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_abc_</th>\
-                        <td>' + (feature.properties['I_abc_'] !== null ? autolinker.link(feature.properties['I_abc_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">a95</th>\
-                        <td>' + (feature.properties['a95'] !== null ? autolinker.link(feature.properties['a95'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">k</th>\
-                        <td>' + (feature.properties['k'] !== null ? autolinker.link(feature.properties['k'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Pol</th>\
-                        <td>' + (feature.properties['Pol'] !== null ? autolinker.link(feature.properties['Pol'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Comments</th>\
-                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_B_Mag_4_0(features) {
-            return {
-                pane: 'pane_B_Mag_4',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(196,60,57,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
-                interactive: true,
-                rotationAngle: features.properties.D_bac_,
-                icon: new LeafIcon({
-                    iconUrl: myIconUrl
-                })
-            }
-        }
-        map.createPane('pane_B_Mag_4');
-        map.getPane('pane_B_Mag_4').style.zIndex = 404;
-        map.getPane('pane_B_Mag_4').style['mix-blend-mode'] = 'normal';
-        var layer_B_Mag_4 = new L.geoJson.multiStyle(json_B_Mag_4, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_B_Mag_4',
-            layerName: 'layer_B_Mag_4',
-            pane: 'pane_B_Mag_4',
-            onEachFeature: pop_B_Mag_4,
-            pointToLayers: [function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.marker(latlng, style_B_Mag_4_0(feature));
-            }
-        ]});
-        bounds_group.addLayer(layer_B_Mag_4);
-        map.addLayer(layer_B_Mag_4);
-        function pop_Paleomagnetic_Locations_5(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">Site_Profi</th>\
-                        <td>' + (feature.properties['Site_Profi'] !== null ? autolinker.link(feature.properties['Site_Profi'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Year</th>\
-                        <td>' + (feature.properties['Year'] !== null ? autolinker.link(feature.properties['Year'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Main_Autho</th>\
-                        <td>' + (feature.properties['Main_Autho'] !== null ? autolinker.link(feature.properties['Main_Autho'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Ref</th>\
-                        <td>' + (feature.properties['Ref'] !== null ? autolinker.link(feature.properties['Ref'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">University</th>\
-                        <td>' + (feature.properties['University'] !== null ? autolinker.link(feature.properties['University'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">DOI</th>\
-                        <td>' + (feature.properties['DOI'] !== null ? autolinker.link(feature.properties['DOI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">M_R</th>\
-                        <td>' + (feature.properties['M_R'] !== null ? autolinker.link(feature.properties['M_R'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Latitude_N</th>\
-                        <td>' + (feature.properties['Latitude_N'] !== null ? autolinker.link(feature.properties['Latitude_N'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Longitude_</th>\
-                        <td>' + (feature.properties['Longitude_'] !== null ? autolinker.link(feature.properties['Longitude_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Q_Geo</th>\
-                        <td>' + (feature.properties['Q_Geo'] !== null ? autolinker.link(feature.properties['Q_Geo'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Rock_Type</th>\
-                        <td>' + (feature.properties['Rock_Type'] !== null ? autolinker.link(feature.properties['Rock_Type'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Formation</th>\
-                        <td>' + (feature.properties['Formation'] !== null ? autolinker.link(feature.properties['Formation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Stratigrap</th>\
-                        <td>' + (feature.properties['Stratigrap'] !== null ? autolinker.link(feature.properties['Stratigrap'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Unit</th>\
-                        <td>' + (feature.properties['Unit'] !== null ? autolinker.link(feature.properties['Unit'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Structural</th>\
-                        <td>' + (feature.properties['Structural'] !== null ? autolinker.link(feature.properties['Structural'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Strike</th>\
-                        <td>' + (feature.properties['Strike'] !== null ? autolinker.link(feature.properties['Strike'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dip</th>\
-                        <td>' + (feature.properties['Dip'] !== null ? autolinker.link(feature.properties['Dip'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">DD</th>\
-                        <td>' + (feature.properties['DD'] !== null ? autolinker.link(feature.properties['DD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Ov</th>\
-                        <td>' + (feature.properties['Ov'] !== null ? autolinker.link(feature.properties['Ov'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Q_Str</th>\
-                        <td>' + (feature.properties['Q_Str'] !== null ? autolinker.link(feature.properties['Q_Str'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Structure</th>\
-                        <td>' + (feature.properties['Structure'] !== null ? autolinker.link(feature.properties['Structure'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Trend</th>\
-                        <td>' + (feature.properties['Trend'] !== null ? autolinker.link(feature.properties['Trend'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Plunge</th>\
-                        <td>' + (feature.properties['Plunge'] !== null ? autolinker.link(feature.properties['Plunge'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">n</th>\
-                        <td>' + (feature.properties['n'] !== null ? autolinker.link(feature.properties['n'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">N1</th>\
-                        <td>' + (feature.properties['N1'] !== null ? autolinker.link(feature.properties['N1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_bac_</th>\
-                        <td>' + (feature.properties['D_bac_'] !== null ? autolinker.link(feature.properties['D_bac_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_bac_</th>\
-                        <td>' + (feature.properties['I_bac_'] !== null ? autolinker.link(feature.properties['I_bac_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_abc_</th>\
-                        <td>' + (feature.properties['D_abc_'] !== null ? autolinker.link(feature.properties['D_abc_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_abc_</th>\
-                        <td>' + (feature.properties['I_abc_'] !== null ? autolinker.link(feature.properties['I_abc_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">a95</th>\
-                        <td>' + (feature.properties['a95'] !== null ? autolinker.link(feature.properties['a95'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">k</th>\
-                        <td>' + (feature.properties['k'] !== null ? autolinker.link(feature.properties['k'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Pol</th>\
-                        <td>' + (feature.properties['Pol'] !== null ? autolinker.link(feature.properties['Pol'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">n2</th>\
-                        <td>' + (feature.properties['n2'] !== null ? autolinker.link(feature.properties['n2'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">N3</th>\
-                        <td>' + (feature.properties['N3'] !== null ? autolinker.link(feature.properties['N3'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_bac_1</th>\
-                        <td>' + (feature.properties['D_bac_1'] !== null ? autolinker.link(feature.properties['D_bac_1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_bac_1</th>\
-                        <td>' + (feature.properties['I_bac_1'] !== null ? autolinker.link(feature.properties['I_bac_1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">D_abc_1</th>\
-                        <td>' + (feature.properties['D_abc_1'] !== null ? autolinker.link(feature.properties['D_abc_1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">I_abc_1</th>\
-                        <td>' + (feature.properties['I_abc_1'] !== null ? autolinker.link(feature.properties['I_abc_1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">a951</th>\
-                        <td>' + (feature.properties['a951'] !== null ? autolinker.link(feature.properties['a951'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">k1</th>\
-                        <td>' + (feature.properties['k1'] !== null ? autolinker.link(feature.properties['k1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Pol1</th>\
-                        <td>' + (feature.properties['Pol1'] !== null ? autolinker.link(feature.properties['Pol1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Comments</th>\
-                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_Paleomagnetic_Locations_5_0() {
-            return {
-                pane: 'pane_Paleomagnetic_Locations_5',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(152,155,156,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,1.0)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Paleomagnetic_Locations_5');
-        map.getPane('pane_Paleomagnetic_Locations_5').style.zIndex = 405;
-        map.getPane('pane_Paleomagnetic_Locations_5').style['mix-blend-mode'] = 'normal';
-        var layer_Paleomagnetic_Locations_5 = new L.geoJson(json_Paleomagnetic_Locations_5, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Paleomagnetic_Locations_5',
-            layerName: 'layer_Paleomagnetic_Locations_5',
-            pane: 'pane_Paleomagnetic_Locations_5',
-            onEachFeature: pop_Paleomagnetic_Locations_5,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Paleomagnetic_Locations_5_0(feature));
-            },
-        });
-        bounds_group.addLayer(layer_Paleomagnetic_Locations_5);
-        map.addLayer(layer_Paleomagnetic_Locations_5);
-        var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Paleomagnetic_Locations_5.png" /> Paleomagnetic_Locations': layer_Paleomagnetic_Locations_5,'<img src="legend/B_Mag_4.png" /> B_Mag': layer_B_Mag_4,'<img src="legend/C_Mag_3.png" /> C_Mag': layer_C_Mag_3,'<img src="legend/Post_Carboniferous_Mag_2.png" /> Post_Carboniferous_Mag': layer_Post_Carboniferous_Mag_2,"Esri Satellite": layer_EsriSatellite_1,"Esri Topo World": layer_EsriTopoWorld_0,}).addTo(map);
-        setBounds();
-        resetLabels([layer_Post_Carboniferous_Mag_2,layer_C_Mag_3,layer_B_Mag_4]);
-        map.on("zoomend", function(){
-            resetLabels([layer_Post_Carboniferous_Mag_2,layer_C_Mag_3,layer_B_Mag_4]);
-        });
-        map.on("layeradd", function(){
-            resetLabels([layer_Post_Carboniferous_Mag_2,layer_C_Mag_3,layer_B_Mag_4]);
-        });
-        map.on("layerremove", function(){
-            resetLabels([layer_Post_Carboniferous_Mag_2,layer_C_Mag_3,layer_B_Mag_4]);
-        });
-        </script>
-    </body>
-</html>
+<WMS_Capabilities xmlns="http://www.opengis.net/wms" xmlns:sld="http://www.opengis.net/sld" xmlns:qgs="http://www.qgis.org/wms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd http://www.qgis.org/wms http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?SERVICE=WMS&REQUEST=GetSchemaExtension" version="1.3.0">
+<Service>
+<Name>WMS</Name>
+<Title>untitled</Title>
+<KeywordList>
+<Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+</KeywordList>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database" xlink:type="simple"/>
+<Fees>None</Fees>
+<AccessConstraints>None</AccessConstraints>
+<MaxWidth>16384</MaxWidth>
+<MaxHeight>16384</MaxHeight>
+</Service>
+<Capability>
+<Request>
+<GetCapabilities>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetCapabilities>
+<GetMap>
+<Format>image/jpeg</Format>
+<Format>image/png</Format>
+<Format>image/png; mode=16bit</Format>
+<Format>image/png; mode=8bit</Format>
+<Format>image/png; mode=1bit</Format>
+<Format>application/dxf</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetMap>
+<GetFeatureInfo>
+<Format>text/plain</Format>
+<Format>text/html</Format>
+<Format>text/xml</Format>
+<Format>application/vnd.ogc.gml</Format>
+<Format>application/vnd.ogc.gml/3.1.1</Format>
+<Format>application/json</Format>
+<Format>application/geo+json</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</GetFeatureInfo>
+<sld:GetLegendGraphic>
+<Format>image/jpeg</Format>
+<Format>image/png</Format>
+<Format>application/json</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</sld:GetLegendGraphic>
+<sld:DescribeLayer>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</sld:DescribeLayer>
+<qgs:GetStyles>
+<Format>text/xml</Format>
+<DCPType>
+<HTTP>
+<Get>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?" xlink:type="simple"/>
+</Get>
+</HTTP>
+</DCPType>
+</qgs:GetStyles>
+</Request>
+<Exception>
+<Format>XML</Format>
+</Exception>
+<sld:UserDefinedSymbolization RemoteWCS="0" SupportSLD="1" UserStyle="1" InlineFeature="0" RemoteWFS="0" UserLayer="0"/>
+<Layer queryable="1">
+<KeywordList>
+<Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+</KeywordList>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-180</westBoundLongitude>
+<eastBoundLongitude>180</eastBoundLongitude>
+<southBoundLatitude>-85.051129</southBoundLatitude>
+<northBoundLatitude>85.05113</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="85.05113" maxy="180" CRS="EPSG:4326" miny="-180" minx="-85.051129"/>
+<BoundingBox maxx="20037508.343" maxy="20037508.627" CRS="EPSG:3857" miny="-20037508.627" minx="-20037508.343"/>
+<Layer queryable="1">
+<Name>Paleomagnetic_Locations</Name>
+<Title>Paleomagnetic_Locations</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-6.331</westBoundLongitude>
+<eastBoundLongitude>-4.510833</eastBoundLongitude>
+<southBoundLatitude>42.803888</southBoundLatitude>
+<northBoundLatitude>43.637</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.637" maxy="-4.510833" CRS="EPSG:4326" miny="-6.331" minx="42.803888"/>
+<BoundingBox maxx="-502143.669" maxy="5409437.871" CRS="EPSG:3857" miny="5282169.214" minx="-704763.697"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Paleomagnetic_Locations&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>B_Mag</Name>
+<Title>B_Mag</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-6.331</westBoundLongitude>
+<eastBoundLongitude>-4.510833</eastBoundLongitude>
+<southBoundLatitude>42.803888</southBoundLatitude>
+<northBoundLatitude>43.637</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.637" maxy="-4.510833" CRS="EPSG:4326" miny="-6.331" minx="42.803888"/>
+<BoundingBox maxx="-502143.669" maxy="5409437.871" CRS="EPSG:3857" miny="5282169.214" minx="-704763.697"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=B_Mag&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>C_Mag</Name>
+<Title>C_Mag</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-inf</westBoundLongitude>
+<eastBoundLongitude>-5.277</eastBoundLongitude>
+<southBoundLatitude>-inf</southBoundLatitude>
+<northBoundLatitude>43.23</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.23" maxy="-5.277" CRS="EPSG:4326" miny="-inf" minx="-inf"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=C_Mag&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Post_Carboniferous_Mag</Name>
+<Title>Post_Carboniferous_Mag</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-6.139</westBoundLongitude>
+<eastBoundLongitude>-4.72517</eastBoundLongitude>
+<southBoundLatitude>42.833</southBoundLatitude>
+<northBoundLatitude>43.43953</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.43953" maxy="-4.72517" CRS="EPSG:4326" miny="-6.139" minx="42.833"/>
+<BoundingBox maxx="-526003.518" maxy="5379113.894" CRS="EPSG:3857" miny="5286587.19" minx="-683390.354"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Post_Carboniferous_Mag&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>(All layers)</Name>
+<Title>(All layers)</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-2022436.262655</westBoundLongitude>
+<eastBoundLongitude>498896.996437</eastBoundLongitude>
+<southBoundLatitude>3196680.739894</southBoundLatitude>
+<northBoundLatitude>5439854.864622</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="5439854.864622" maxy="498896.996437" CRS="EPSG:4326" miny="-2022436.262655" minx="3196680.739894"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=(All layers)&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Buzamientos</Name>
+<Title>Buzamientos</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-18.149799</westBoundLongitude>
+<eastBoundLongitude>4.307824</eastBoundLongitude>
+<southBoundLatitude>27.641658</southBoundLatitude>
+<northBoundLatitude>43.772696</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.772696" maxy="4.307824" CRS="EPSG:4326" miny="-18.149799" minx="27.641658"/>
+<BoundingBox maxx="479544.694" maxy="5430333.354" CRS="EPSG:3857" miny="3203869.766" minx="-2020426.366"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Buzamientos&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Contactos</Name>
+<Title>Contactos</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-18.161186</westBoundLongitude>
+<eastBoundLongitude>4.327782</eastBoundLongitude>
+<southBoundLatitude>27.637738</southBoundLatitude>
+<northBoundLatitude>43.792384</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.792384" maxy="4.327782" CRS="EPSG:4326" miny="-18.161186" minx="27.637738"/>
+<BoundingBox maxx="481766.38" maxy="5433369.069" CRS="EPSG:3857" miny="3203377.209" minx="-2021693.936"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Contactos&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Cuaternario - Lineas auxiliares</Name>
+<Title>Cuaternario - Lineas auxiliares</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-9.024653</westBoundLongitude>
+<eastBoundLongitude>3.441647</eastBoundLongitude>
+<southBoundLatitude>35.178993</southBoundLatitude>
+<northBoundLatitude>43.669149</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.669149" maxy="3.441647" CRS="EPSG:4326" miny="-9.024653" minx="35.178993"/>
+<BoundingBox maxx="383122.35" maxy="5414384.06" CRS="EPSG:3857" miny="4188232.392" minx="-1004619.714"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Cuaternario - Lineas auxiliares&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Cuaternario - Recintos </Name>
+<Title>Cuaternario - Recintos </Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-7.580648</westBoundLongitude>
+<eastBoundLongitude>1.612681</eastBoundLongitude>
+<southBoundLatitude>36.061435</southBoundLatitude>
+<northBoundLatitude>43.561159</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.561159" maxy="1.612681" CRS="EPSG:4326" miny="-7.580648" minx="36.061435"/>
+<BoundingBox maxx="179522.724" maxy="5397779.673" CRS="EPSG:3857" miny="4309078.165" minx="-843873.86"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Cuaternario - Recintos &FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Ejes</Name>
+<Title>Ejes</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-9.055532</westBoundLongitude>
+<eastBoundLongitude>3.377159</eastBoundLongitude>
+<southBoundLatitude>35.180101</southBoundLatitude>
+<northBoundLatitude>43.713978</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.713978" maxy="3.377159" CRS="EPSG:4326" miny="-9.055532" minx="35.180101"/>
+<BoundingBox maxx="375943.55" maxy="5421285.671" CRS="EPSG:3857" miny="4188383.266" minx="-1008057.132"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Ejes&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Indicios minerales</Name>
+<Title>Indicios minerales</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-7.783022</westBoundLongitude>
+<eastBoundLongitude>1.555388</eastBoundLongitude>
+<southBoundLatitude>38.000736</southBoundLatitude>
+<northBoundLatitude>43.50138</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.50138" maxy="1.555388" CRS="EPSG:4326" miny="-7.783022" minx="38.000736"/>
+<BoundingBox maxx="173144.933" maxy="5388601.009" CRS="EPSG:3857" miny="4579529.839" minx="-866401.981"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Indicios minerales&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Lineas auxiliares</Name>
+<Title>Lineas auxiliares</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-18.162291</westBoundLongitude>
+<eastBoundLongitude>4.328013</eastBoundLongitude>
+<southBoundLatitude>27.639297</southBoundLatitude>
+<northBoundLatitude>43.777559</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.777559" maxy="4.328013" CRS="EPSG:4326" miny="-18.162291" minx="27.639297"/>
+<BoundingBox maxx="481792.196" maxy="5431083.178" CRS="EPSG:3857" miny="3203573.055" minx="-2021816.887"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Lineas auxiliares&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Recintos geología</Name>
+<Title>Recintos geología</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-18.161186</westBoundLongitude>
+<eastBoundLongitude>4.327782</eastBoundLongitude>
+<southBoundLatitude>27.637738</southBoundLatitude>
+<northBoundLatitude>43.792384</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.792384" maxy="4.327782" CRS="EPSG:4326" miny="-18.161186" minx="27.637738"/>
+<BoundingBox maxx="481766.38" maxy="5433369.069" CRS="EPSG:3857" miny="3203377.209" minx="-2021693.936"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Recintos geología&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Rótulos unidades</Name>
+<Title>Rótulos unidades</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-18.163009</westBoundLongitude>
+<eastBoundLongitude>4.328036</eastBoundLongitude>
+<southBoundLatitude>27.639487</southBoundLatitude>
+<northBoundLatitude>43.777131</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.777131" maxy="4.328036" CRS="EPSG:4326" miny="-18.163009" minx="27.639487"/>
+<BoundingBox maxx="481794.679" maxy="5431017.105" CRS="EPSG:3857" miny="3203596.959" minx="-2021896.863"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Rótulos unidades&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Zonas GEODE</Name>
+<Title>Zonas GEODE</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-18.167855</westBoundLongitude>
+<eastBoundLongitude>4.481668</eastBoundLongitude>
+<southBoundLatitude>27.584434</southBoundLatitude>
+<northBoundLatitude>43.834426</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="43.834426" maxy="4.481668" CRS="EPSG:4326" miny="-18.167855" minx="27.584434"/>
+<BoundingBox maxx="498896.997" maxy="5439854.865" CRS="EPSG:3857" miny="3196680.739" minx="-2022436.263"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Zonas GEODE&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Esri Satellite</Name>
+<Title>Esri Satellite</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-180</westBoundLongitude>
+<eastBoundLongitude>180</eastBoundLongitude>
+<southBoundLatitude>-85.051129</southBoundLatitude>
+<northBoundLatitude>85.051129</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="85.051129" maxy="180" CRS="EPSG:4326" miny="-180" minx="-85.051129"/>
+<BoundingBox maxx="20037508.343" maxy="20037508.343" CRS="EPSG:3857" miny="-20037508.343" minx="-20037508.343"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Esri Satellite&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>Esri Topo World</Name>
+<Title>Esri Topo World</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-180</westBoundLongitude>
+<eastBoundLongitude>180</eastBoundLongitude>
+<southBoundLatitude>-85.051129</southBoundLatitude>
+<northBoundLatitude>85.051129</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="85.051129" maxy="180" CRS="EPSG:4326" miny="-180" minx="-85.051129"/>
+<BoundingBox maxx="20037508.343" maxy="20037508.343" CRS="EPSG:3857" miny="-20037508.343" minx="-20037508.343"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Esri Topo World&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+<Layer queryable="1">
+<Name>OSM OpenTopoMap</Name>
+<Title>OSM OpenTopoMap</Title>
+<CRS>CRS:84</CRS>
+<CRS>EPSG:3857</CRS>
+<CRS>EPSG:4326</CRS>
+<EX_GeographicBoundingBox>
+<westBoundLongitude>-180</westBoundLongitude>
+<eastBoundLongitude>180</eastBoundLongitude>
+<southBoundLatitude>-85.051129</southBoundLatitude>
+<northBoundLatitude>85.051129</northBoundLatitude>
+</EX_GeographicBoundingBox>
+<BoundingBox maxx="85.051129" maxy="180" CRS="EPSG:4326" miny="-180" minx="-85.051129"/>
+<BoundingBox maxx="20037508.343" maxy="20037508.343" CRS="EPSG:3857" miny="-20037508.343" minx="-20037508.343"/>
+<Style>
+<Name>default</Name>
+<Title>default</Title>
+<LegendURL>
+<Format>image/png</Format>
+<OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wms.prod.qgiscloud.com/MatthewNewell/QGIS_Cloud_Paleomag_Database?&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=OSM OpenTopoMap&FORMAT=image/png&STYLE=default&SLD_VERSION=1.1.0" xlink:type="simple"/>
+</LegendURL>
+</Style>
+</Layer>
+</Layer>
+</Capability>
+</WMS_Capabilities>
