@@ -36,6 +36,7 @@
         <script src="data/C_Mag_3.js"></script>
         <script src="data/B_Mag_4.js"></script>
         <script src="data/Paleomagnetic_Locations_5.js"></script>
+        <script src="js/leaflet-marker.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -241,12 +242,24 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Post_Carboniferous_Mag_2_0() {
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize:     [100, 100],
+                shadowSize:   [0, 0],
+                iconAnchor:   [50, 50],
+                popupAnchor:  [-3, -76]
+            }
+        });
+
+        let achenSvgString = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/></svg>'
+        let myIconUrl = encodeURI("data:image/svg+xml," + achenSvgString).replace('#','%23');
+
+        function style_Post_Carboniferous_Mag_2_0(features) {
             return {
                 pane: 'pane_Post_Carboniferous_Mag_2',
                 radius: 6.0,
                 opacity: 1,
-                color: 'rgba(183,72,75,1.0)',
+                color: 'rgba(196,60,57,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -255,55 +268,10 @@
                 fillOpacity: 1,
                 fillColor: 'rgba(255,0,0,1.0)',
                 interactive: true,
-            }
-        }
-        function style_Post_Carboniferous_Mag_2_1() {
-            return {
-                pane: 'pane_Post_Carboniferous_Mag_2',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(183,72,75,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
-                interactive: true,
-            }
-        }
-        function style_Post_Carboniferous_Mag_2_2() {
-            return {
-                pane: 'pane_Post_Carboniferous_Mag_2',
-                radius: 12.0,
-                opacity: 1,
-                color: 'rgba(6,2,2,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
-                interactive: true,
-            }
-        }
-        function style_Post_Carboniferous_Mag_2_3() {
-            return {
-                pane: 'pane_Post_Carboniferous_Mag_2',
-                shape: 'triangle',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(0,0,0,1.0)',
-                interactive: true,
+                rotationAngle: features.properties.D_bac_,
+                icon: new LeafIcon({
+                    iconUrl: myIconUrl
+                })
             }
         }
         map.createPane('pane_Post_Carboniferous_Mag_2');
@@ -321,26 +289,8 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_Post_Carboniferous_Mag_2_0(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_Post_Carboniferous_Mag_2_1(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_Post_Carboniferous_Mag_2_2(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_Post_Carboniferous_Mag_2_3(feature));
-            },
+                return L.marker(latlng, style_Post_Carboniferous_Mag_2_0(feature));
+            }
         ]});
         bounds_group.addLayer(layer_Post_Carboniferous_Mag_2);
         map.addLayer(layer_Post_Carboniferous_Mag_2);
@@ -486,7 +436,7 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_C_Mag_3_0() {
+        function style_C_Mag_3_0(features) {
             return {
                 pane: 'pane_C_Mag_3',
                 radius: 6.0,
@@ -500,55 +450,10 @@
                 fillOpacity: 1,
                 fillColor: 'rgba(255,0,0,1.0)',
                 interactive: true,
-            }
-        }
-        function style_C_Mag_3_1() {
-            return {
-                pane: 'pane_C_Mag_3',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(196,60,57,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
-                interactive: true,
-            }
-        }
-        function style_C_Mag_3_2() {
-            return {
-                pane: 'pane_C_Mag_3',
-                radius: 12.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
-                interactive: true,
-            }
-        }
-        function style_C_Mag_3_3() {
-            return {
-                pane: 'pane_C_Mag_3',
-                shape: 'triangle',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(1,1,0,1.0)',
-                interactive: true,
+                rotationAngle: features.properties.D_bac_,
+                icon: new LeafIcon({
+                    iconUrl: myIconUrl
+                })
             }
         }
         map.createPane('pane_C_Mag_3');
@@ -566,26 +471,8 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_C_Mag_3_0(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_C_Mag_3_1(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_C_Mag_3_2(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_C_Mag_3_3(feature));
-            },
+                return L.marker(latlng, style_C_Mag_3_0(feature));
+            }
         ]});
         bounds_group.addLayer(layer_C_Mag_3);
         map.addLayer(layer_C_Mag_3);
@@ -735,12 +622,12 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_B_Mag_4_0() {
+        function style_B_Mag_4_0(features) {
             return {
                 pane: 'pane_B_Mag_4',
                 radius: 6.0,
                 opacity: 1,
-                color: 'rgba(183,72,75,1.0)',
+                color: 'rgba(196,60,57,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -749,55 +636,10 @@
                 fillOpacity: 1,
                 fillColor: 'rgba(255,0,0,1.0)',
                 interactive: true,
-            }
-        }
-        function style_B_Mag_4_1() {
-            return {
-                pane: 'pane_B_Mag_4',
-                radius: 6.0,
-                opacity: 1,
-                color: 'rgba(183,72,75,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
-                interactive: true,
-            }
-        }
-        function style_B_Mag_4_2() {
-            return {
-                pane: 'pane_B_Mag_4',
-                radius: 12.0,
-                opacity: 1,
-                color: 'rgba(0,0,0,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,1.0)',
-                interactive: true,
-            }
-        }
-        function style_B_Mag_4_3() {
-            return {
-                pane: 'pane_B_Mag_4',
-                shape: 'triangle',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(0,0,0,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(3,3,3,1.0)',
-                interactive: true,
+                rotationAngle: features.properties.D_bac_,
+                icon: new LeafIcon({
+                    iconUrl: myIconUrl
+                })
             }
         }
         map.createPane('pane_B_Mag_4');
@@ -815,26 +657,8 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_B_Mag_4_0(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_B_Mag_4_1(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_B_Mag_4_2(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_B_Mag_4_3(feature));
-            },
+                return L.marker(latlng, style_B_Mag_4_0(feature));
+            }
         ]});
         bounds_group.addLayer(layer_B_Mag_4);
         map.addLayer(layer_B_Mag_4);
