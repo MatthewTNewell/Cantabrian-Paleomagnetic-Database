@@ -4,7 +4,7 @@ The database has been restricted to the Cantabrian Zone of North Western Iberia 
 
 The data contained here came from 12 studies *(Bonhommet et al., 1981; Hirt et al. 1992; Pares et al., 1994; Ries et al., 1980; Schott and Peres, 1987; Stewart, 1995; Van der Voo et al., 1997; Weil et al., 2013; Weil et al., 2010; Weil, 2006; Weil et al. 2001; Weil et al., 2000)* as well as new currently unpublished data from the Villamanin area collected by Professor Thomas Blenkinsop (Cardiff University) and Tania Mochales (Instituto Geologico y Minero de Espana) during the summers of 2015 and 2016 at 13 sites across the Lancara, San Emiliana, La Vid, Barcallente and Barrios Formations. Overall 423 sites sampled for paleomagnetic investigation from Paleozoic redbeds and carbonates are presented here. Data was extracted from papers using the freely available software Tabula and has been laid out to be similar to the Pyrenean paleomagnetic database *(Lopez et al., 2008)*. The data fields try to assemble the information necessary to quantify the amount of vertical axis rotation the rocks have experienced, as well as evaluate the reliability and quality of the data based on the requirements laid out by Van der Voo (1990), allowing future overviews of the Cantabrian dataset. An explaination of the various data fields can be found [here](https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/README.md).
 
-<center><iframe src="https://github.com/MatthewTNewell/Cantabrian-Paleomagnetic-Database/blob/main/Webmap.xml" height="695" width="1025"></iframe></center>
+<center><iframe src="Webmap.xml" height="695" width="1025"></iframe></center>
 
 <center><iframe src="Cantabrian_Paleomagnetic_Database.html" height="500" width="1025"></iframe></center>
 
